@@ -1,16 +1,12 @@
 package com.upgrade.tests;
 
-import com.github.javafaker.Faker;
 import com.upgrade.pages.LandingPage;
 import com.upgrade.pages.SignInPage;
 import com.upgrade.pojos.Borrower;
 import lombok.extern.log4j.Log4j;
 import org.testng.annotations.Test;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
+import static com.upgrade.tests.BorrowerDataProvider.*;
 
 @Log4j
 public class LoanOffersUITest extends AbstractTest {
@@ -23,11 +19,7 @@ public class LoanOffersUITest extends AbstractTest {
 
     @Test
     public void validateOffersTest() {
-        /**Removed below line because now this method is in the abstractBorrower class**/
-        //Borrower borrower = getRandomTestBorrower();
-        /**Added below line by dany**/
-        Borrower borrower = getRandomTestBorrowerUseCase1();
-
+        Borrower borrower = getTestBorrowerGoodCredit();
         LandingPage landingPage = new LandingPage(getDriver());
 
         //Capture offer details in the Offers page
@@ -56,64 +48,17 @@ public class LoanOffersUITest extends AbstractTest {
     @Test
     public void validateDeclineLoanTest() {
         // Implement Case # 2
+        Borrower borrower = getTestBorrowerBadCredit();
+        LandingPage landingPage = new LandingPage(getDriver());
+
+        landingPage
+                .gotoLandingPage(url)
+                .enterLoanDetails(borrower)
+                .enterContactDetails(borrower)
+                .enterIncomeDetails(borrower)
+                .enterLoginDetails(borrower);
+
+        //Validate the loan is declined
     }
-
-    /** Added by dany - Methods **/
-
-    /**Added by dany new getRandomTestBorrower for test 1
-     * loan desired between 5000 and 10000
-     * purpose:
-     * Income: **/
-    private Borrower getRandomTestBorrowerUseCase1() extends AbstractBorrower{
-        Borrower borrower = new Borrower();
-        Faker faker = new Faker(new Locale("en-US"));
-
-        borrower.setFirstName(faker.name().firstName());
-        borrower.setLastName(faker.name().lastName());
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        borrower.setDob(simpleDateFormat.format(faker.date().birthday()));
-        borrower.setCity(faker.address().city());
-        borrower.setEmail(String.format("coding.%s@upgrade-challenge.com", generateRandomNumberFromRange(15000000, 20000000)));
-        borrower.setPassword("System@987");
-        borrower.setZipCode(faker.address().zipCode());
-        borrower.setStreet(faker.address().streetAddress());
-        borrower.setState("CA");
-        borrower.setLoanPurpose("Home Improvement");
-        borrower.setYearlyIncome(generateRandomNumberFromRange(150000, 200000));
-        borrower.setAdditionalIncome(generateRandomNumberFromRange(1000, 10000));
-        borrower.setDesiredLoanAmount(generateRandomNumberFromRange(5000, 10000));
-        return borrower;
-    }
-
-    /**This method was moved to abstractBorrower class**/
-    /*private Borrower getRandomTestBorrower() {
-        Borrower borrower = new Borrower();
-        Faker faker = new Faker(new Locale("en-US"));
-
-        borrower.setFirstName(faker.name().firstName());
-        borrower.setLastName(faker.name().lastName());
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        borrower.setDob(simpleDateFormat.format(faker.date().birthday()));
-        borrower.setCity(faker.address().city());
-        borrower.setEmail(String.format("coding.%s@upgrade-challenge.com", generateRandomNumberFromRange(15000000, 20000000)));
-        borrower.setPassword("System@987");
-        borrower.setZipCode(faker.address().zipCode());
-        borrower.setStreet(faker.address().streetAddress());
-        borrower.setState("CA");
-        borrower.setLoanPurpose("Home Improvement");
-        borrower.setYearlyIncome(generateRandomNumberFromRange(150000, 200000));
-        borrower.setAdditionalIncome(generateRandomNumberFromRange(1000, 10000));
-        borrower.setDesiredLoanAmount(generateRandomNumberFromRange(5000, 10000));
-        return borrower;
-    }
-    */
-
-    /***This method was moved to abstractBorrower class***/
-    /* private BigDecimal generateRandomNumberFromRange(int min, int max) {
-        return BigDecimal.valueOf(Math.random() * (max - min + 1) + min).setScale(0, RoundingMode.DOWN);
-    }
-     */
 
 }
