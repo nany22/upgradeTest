@@ -37,12 +37,14 @@ public class BorrowerDataProvider {
                 .yearlyIncome(generateRandomNumberFromRange(100, 1000))
                 .additionalIncome(generateRandomNumberFromRange(100, 500))
                 .desiredLoanAmount(generateRandomNumberFromRange(5000, 10000))
+                /*Its not requested being different but just to show I know there are several dropdown options*/
+                .loanPurpose("Business")
                 .build();
     }
 
     /*I added "static" because this method will be loaded at memory at compilation time
-    /*was used the builder method to make the borrower user base and then continue creating
-    him in each method needed
+    /*was used the builder method as alternative way to construct complex objects, making the borrower user base
+    and then continue creating the immutable object in each method needed.
     Instead of set as follow "borrower.setFirstName(faker.name().firstName());", with
     builder we can set each field as ".firstName(faker.name().firstName());"
     */
@@ -53,6 +55,7 @@ public class BorrowerDataProvider {
                 .dob(simpleDateFormat.format(faker.date().birthday()))
                 .email(String.format("coding.%s@upgrade-challenge.com", generateRandomNumberFromRange(15000000, 20000000)))
                 .password("System@987")
+                .city(faker.address().city())
                 .zipCode(faker.address().zipCode())
                 .street(faker.address().streetAddress())
                 .state("CA")

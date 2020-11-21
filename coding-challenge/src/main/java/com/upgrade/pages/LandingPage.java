@@ -24,6 +24,8 @@ public class LandingPage extends BasePage {
         super(driver);
     }
 
+    /*the 3 fields to complete before getting your approve loan
+    * the borrower.get<something> calls to the getters of borrower pojo*/
     public ContactInfoPage enterLoanDetails(Borrower borrower) {
         type(loanAmount, borrower.getDesiredLoanAmount().toString());
         selectDropDownByTextIgnoringCase(dropLoanPurposeBtn, borrower.getLoanPurpose());
@@ -31,6 +33,7 @@ public class LandingPage extends BasePage {
         return new ContactInfoPage(driver);
     }
 
+    /*Go to the specific url path and wait until loanAmount field is present*/
     public LandingPage gotoLandingPage(String url) {
         String server = String.format("%s/funnel/nonDMFunnel", url);
         log.info("Navigate to - " + server);
@@ -39,4 +42,4 @@ public class LandingPage extends BasePage {
         return this;
     }
 
-}
+ }

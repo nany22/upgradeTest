@@ -1,12 +1,19 @@
 package com.upgrade.pages;
 
 import com.upgrade.pojos.Borrower;
+import lombok.extern.log4j.Log4j;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+
+@Log4j
 public class LoginInfoPage extends BasePage {
 
     @FindBy(name = "username")
@@ -39,13 +46,22 @@ public class LoginInfoPage extends BasePage {
     }
 
     // Note : Use java generics to return a different page
-    public SelectOfferPage enterLoginDetails(Borrower randomPerson) {
+    //public static <T extends PageObject> T enterLoginDetails(Borrower randomPerson) throws Exception
+    public <T extends FunnelBasePage> T enterLoginDetails(Borrower randomPerson){
         type(email, randomPerson.getEmail());
         type(password, randomPerson.getPassword());
         selectTermsOfUse();
         click(checkYourRateBtn);
         waitForPage();
-        return new SelectOfferPage(driver);
+        //We need a logic to use java generic and choose the right pageObject
+        if (driver.getCurrentUrl().contains("offer-page")){
+            log.info("User is redirected to OfferPage");
+            return (T) new SelectOfferPage(driver);
+        }
+        else {
+            log.info("User is redirected to AdversePage");
+            return (T) new AdversePage(driver);
+        }
     }
 
     public LoginInfoPage selectTermsOfUse() {

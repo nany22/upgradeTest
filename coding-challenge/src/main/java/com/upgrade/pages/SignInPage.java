@@ -24,6 +24,7 @@ public class SignInPage extends BasePage {
         super(driver);
     }
 
+    /*log in action*/
     public SelectOfferPage signIn(Borrower borrower) {
         type(username, borrower.getEmail());
         type(password, borrower.getPassword());
@@ -32,6 +33,7 @@ public class SignInPage extends BasePage {
         return new SelectOfferPage(driver);
     }
 
+    /*Go to sign in page and wait until username field is present*/
     public SignInPage gotoSignInPage(String url) {
         String server = String.format("%s/portal/login", url);
         log.info("Navigate to - " + server);
@@ -39,4 +41,5 @@ public class SignInPage extends BasePage {
         waitForWebElements(Arrays.asList(username));
         return this;
     }
+
 }
