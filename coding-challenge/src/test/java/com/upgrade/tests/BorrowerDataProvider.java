@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class BorrowerDataProvider {
+    //Check: IS OK IT DOES NOT EXTENDS NOTHING??????????
+
     /*those 2 lines were set at the top of class instead of inside of getTestBorrowerBase method,
     * to make sure this object is not created any time I call to the method, due to it is static
     *  and it is not setting anything*/
@@ -47,7 +49,7 @@ public class BorrowerDataProvider {
     and then continue creating the immutable object in each method needed.
     Instead of set as follow "borrower.setFirstName(faker.name().firstName());", with
     builder we can set each field as ".firstName(faker.name().firstName());"
-    */
+    Borrower.builder() is like a builder of everything inside Borrower pojo*/
     private static Borrower.BorrowerBuilder getTestBorrowerBase() {
         return Borrower.builder()
                 .firstName(faker.name().firstName())
