@@ -23,9 +23,8 @@ public class LoanOffersUITest extends AbstractTest {
         Borrower borrower = getTestBorrowerGoodCredit();
         LandingPage landingPage = new LandingPage(getDriver());
 
-        //Capture offer details in the Offers page
-        /*Create a new instance SelectOfferPage (because values to save are in this page)
-        to make easier to save values after login*/
+        /* Assigning landingPage to a SelectOfferPage object to make it
+        easier to save values (taken of SelectOfferPage) after login */
         SelectOfferPage firstLogin = landingPage
                 .gotoLandingPage(url)
                 .enterLoanDetails(borrower)
@@ -41,15 +40,14 @@ public class LoanOffersUITest extends AbstractTest {
         String firstAPR = firstLogin.getLoanAPR();
         firstLogin.clickSignOut();
 
-        //Capture offer details in the Offers page
-        /*Create a new instance SelectOfferPage (because values to save are in this page)
-        to make easier to save values after login*/
+        /* Assigning landingPage to a SignInPage object to make it
+        easier to save values (taken of SignInPage) after login */
         SignInPage signInPage = new SignInPage(getDriver());
         SelectOfferPage secondLogin = signInPage
                 .gotoSignInPage(url)
                 .signIn(borrower);
 
-        //save page values for second login in the `/offer-page`
+        //save page values for second login in the `/signing page`
         String secondAmount = secondLogin.getLoanAmount();
         String secondTerm = firstLogin.getLoanTerm();
         String secondMonthlyPayment = firstLogin.getMonthlyPayment();
@@ -73,7 +71,6 @@ public class LoanOffersUITest extends AbstractTest {
 
     @Test
     public void validateDeclineLoanTest() {
-        // Implement Case # 2
         Borrower borrower = getTestBorrowerBadCredit();
         LandingPage landingPage = new LandingPage(getDriver());
 
@@ -91,14 +88,15 @@ public class LoanOffersUITest extends AbstractTest {
         String declinedMessage = adversePage.getDeclinedMessage();
         Assert.assertTrue(declinedMessage.contains("We´re sorry, you were not approved."));
 
-        //Validate current page (Needs to get loanID WIP)
-        //String expectedDocumentsPath = adversePage.adverseAction(url);
-        //String actualDocumentsPath = getDriver().getCurrentUrl();
-        //Assert.assertEquals(actualDocumentsPath, expectedDocumentsPath);
+        //Validate current page includes loan id (WIP get loanID)
+        String expectedDocumentsPath = adversePage.adverseAction(url);
+        String actualDocumentsPath = getDriver().getCurrentUrl();
+        Assert.assertEquals(actualDocumentsPath, expectedDocumentsPath);
 
-        //Validate specific PDF link exists
+        //Validate specific PDF link exists (WIP get td link)
         DocumentsPage documentsPage = new DocumentsPage(getDriver());
-        documentsPage.findLinkDocument("Adverse Action Notice.pdf");
+        boolean linkIsPresent = documentsPage.findLinkDocument("Adverse Action Notice.pdf");
+        Assert.assertEquals(linkIsPresent, true);
 
     }
 

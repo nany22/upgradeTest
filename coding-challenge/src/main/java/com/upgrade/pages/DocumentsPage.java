@@ -1,6 +1,7 @@
 package com.upgrade.pages;
 
 import lombok.extern.log4j.Log4j;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,28 +19,30 @@ public class DocumentsPage extends BasePage {
     } )
     private List<WebElement> tableRows;
 
-    @FindBy(css = "[data-auto='downloadDocument']")
-    private WebElement downloadLink;
-
     public DocumentsPage(WebDriver driver){
         super(driver);
     }
 
-    public void findLinkDocument(String docName){
-        //boolean notExist = true;
-        //for (WebElement row: tableRows){
-        //    List<WebElement> tds = row.findElements(By.tagName("td"));
-            //if (tds.get(0).getText().equalsIgnoreCase(docName)){
-        //      notExist = false;
-         //     log.info("this document exist");
-                //if(tds.get(2).getText().contains(downloadLink)){
-                //    //tds.get(2).getText();
-                //    log.info("link for " + docName +" exist");
-          //      }
-              //  else log.info("document" + docName + "has not a link");
-           // }
-       // }
-        //if (notExist)  System.out.println("document" + docName + "does not exist");
+    public boolean findLinkDocument(String docName){
+        boolean docExist = false;
+        boolean linkExist = false;
+        for (WebElement row: tableRows) {
+            List<WebElement> tds = row.findElements(By.tagName("td"));
+            if (tds.get(0).getText().equalsIgnoreCase(docName)) {
+                docExist = true;
+                log.info("this document exist");
+                if (tds.get(2).getAttribute("data-auto").contains("downloadDocument")) {
+                    log.info("link for " + docName + " also exist");
+                    linkExist = true;
+                } else {
+                    log.info("document" + docName + "has not a link");
+                }
+                break;
+            }
+        }
+        if (docExist) System.out.println("document" + docName + "does not exist");
+        return linkExist;
+
     }
 
 }
