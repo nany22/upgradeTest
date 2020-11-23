@@ -15,14 +15,14 @@ This is challenge requested by Upgrade
         - [Lombok](https://projectlombok.org/setup/eclipse) 
         - [TestNG](https://marketplace.eclipse.org/content/testng-eclipse) 
 ### Test Cases for challenge:
-  - *Test Case 1: Validate Offer Test (WEB UI)*
+  - **Test Case 1: Validate Offer Test (WEB UI)**
     * > LoanOffersUITest.java
     * *Statement:* Using the UI, verify that after filling out the loan application form (with valid inputs), you are seeing loan offers after signing out and back in again.
     * *What I did on my own:* 
       - [x] Adding assertion for following requirement: Validate that for current page `/offer-page` for default offer (first one on the page) Loan Amount, Monthly Payment, Term, Interest Rate and APR matches with the info captured previously
       - [x] Adding missing attributes like static, final, private.
             
-  - *Test Case 2: Validate Declined Loan Test (WEB UI)*
+  - **Test Case 2: Validate Declined Loan Test (WEB UI)**
     * > LoanOffersUITest.java, BorrowerDataProvider.java, AdversePage.java, DocumentsPage.java
     * *Statement:* Verify that your loan application is rejected when annual income specified is lower than the requested loan amount.
     * *What I did on my own:* 
@@ -34,7 +34,7 @@ This is challenge requested by Upgrade
         - [x] Validate loan is rejected with "We´re sorry, you were not approved." page
         - [x] From the `funnel/adverse-page`Click on "If you would like to learn more about why you were not approved, please click here".
         - [x] Validate that current page is `/portal/product/<loanId>/documents`Validate that a link to "Adverse Action Notice.pdf" exists on the page.
-  - *Test Case 3: Login to account Test (API)*
+  - **Test Case 3: Login to account Test (API)**
     * > LoanApiTest.java, LoanAccountResponse.java, LoanInReviewResponse.java, LoanResponse.java
     * *Statement:* Upgrade exposes a login API for registered borrowers, that should provide a 200 (OK) response if valid credentials are specified in the request. And a 401 response if the specified credentials are invalid. 
 The API endpoint is available at: https://credapi.credify.tech/api/brportorch/v2/login
