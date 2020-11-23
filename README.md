@@ -1,4 +1,4 @@
-:point_right: ## UpgradeTest
+## :point_right:  UpgradeTest
 
 ### Overview
 This is challenge requested by Upgrade
@@ -50,7 +50,5 @@ In your automated tests - validate atleast the following, and feel free to inclu
           - 2. [x] Adding assert for product type data from LoanInReview list and other extra fields from LoanAccountResponse and firstname from UserResponse.
           - 3. [x] Writing a new test case 4: **Invalid Logging to account test (API)** for 401 cose status validation after request is sent.
           
-          
-          
-       :smiley:
+         
    
