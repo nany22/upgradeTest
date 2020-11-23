@@ -46,14 +46,13 @@ public class LoginInfoPage extends BasePage {
     }
 
     // Note : Use java generics to return a different page
-    //public static <T extends PageObject> T enterLoginDetails(Borrower randomPerson) throws Exception
     public <T extends FunnelBasePage> T enterLoginDetails(Borrower randomPerson){
         type(email, randomPerson.getEmail());
         type(password, randomPerson.getPassword());
         selectTermsOfUse();
         click(checkYourRateBtn);
         waitForPage();
-        //We need a logic to use java generic and choose the right pageObject
+        //We need a logic (url or element) to use java generic and choose the right pageObject
         if (driver.getCurrentUrl().contains("offer-page")){
             log.info("User is redirected to OfferPage");
             return (T) new SelectOfferPage(driver);

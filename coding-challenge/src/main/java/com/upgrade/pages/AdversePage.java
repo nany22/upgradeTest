@@ -1,11 +1,11 @@
 package com.upgrade.pages;
 
-import lombok.extern.log4j.Log4j;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-@Log4j
+
 public class AdversePage extends FunnelBasePage{
 
     @FindBy(css = "[data-auto='adverse-learn-more-link']")
@@ -18,30 +18,16 @@ public class AdversePage extends FunnelBasePage{
         super(driver);
     }
 
-    private void adverseLearnMoreLink(){
+    /* Click on "learn more" link */
+    public void adverseLearnMoreLink(){
         click(adverseLink);
+        By by = By.cssSelector("[data-auto='layoutTitle']");
+        waitForElementToBeDisplayed(by, 10, 1);
     }
 
-    @FindBy(css = "")
-    private WebElement loanID;
-
-    public String adverseAction(String url) {
-        String loanId = "100018687";
-        adverseLearnMoreLink();
-        String productPath = String.format("%s/portal/product", url);
-        String documentsPath = String.format("%s/%s/documents", productPath, loanId);
-        //this is other option
-        //String docPath = productPath + loanId + "/document";
-        log.info("Making url path " + documentsPath);
-
-        return documentsPath;
-    }
-
+    /* Get the message for when loan was declined */
     public String getDeclinedMessage() {
         return declinedMessage.getText();
     }
 
-    public String getLoanID(){
-        return loanID.getText();
-    }
 }

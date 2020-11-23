@@ -2,34 +2,24 @@ package com.upgrade.pojos;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 import java.util.*;
 
-@Builder
+@Getter
+@Setter
+@NoArgsConstructor
 public class UserResponse {
 
-    @Setter @Getter String firstName;
-    @Setter @Getter String userId;
-    @Setter @Getter String userUuid;
-    @Setter @Getter String authenticationLevel;
-    @Setter @Getter String actorId;
-    @Setter @Getter ArrayList loanApplications;
-    Dictionary<String, String> loanInReview;;
+    private String firstName;
+    private String userId;
+    private String userUuid;
+    private String authenticationLevel;
+    private String actorId;
+    private List loanApplications;
+    private List<LoanInReviewResponse> loansInReview;;
+    private List<LoanAccountResponse> loanAccountSummaryAto;
 
-    //private Map<String,String> loanInReview;
-
-    public void loanInReviewSetter(String key, String value){
-        if(loanInReview.containsKey(key)) {
-            loanInReview[key] = value;
-        }
-    }
-    public String loanInReviewGetter(String key){
-        String result = null;
-        if (loanInReview.containsKey(key)){
-            result = loanInReview[key];
-        }
-        return result;
-    }
 }

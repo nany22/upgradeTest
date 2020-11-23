@@ -39,7 +39,7 @@ public class BorrowerDataProvider {
                 .yearlyIncome(generateRandomNumberFromRange(100, 1000))
                 .additionalIncome(generateRandomNumberFromRange(100, 500))
                 .desiredLoanAmount(generateRandomNumberFromRange(5000, 10000))
-                /*Its not requested being different but just to show I know there are several dropdown options*/
+                /*Its not requested being different but just to choose another purpose*/
                 .loanPurpose("Business")
                 .build();
     }
@@ -64,7 +64,7 @@ public class BorrowerDataProvider {
                 .loanPurpose("Home Improvement");
     }
 
-    /*I added "static" because this method will be loaded at memory at compilation time*/
+    /*I added "static" as improvement because this method will be loaded at memory at compilation time*/
     private static BigDecimal generateRandomNumberFromRange(int min, int max) {
         return BigDecimal.valueOf(Math.random() * (max - min + 1) + min).setScale(0, RoundingMode.DOWN);
     }
