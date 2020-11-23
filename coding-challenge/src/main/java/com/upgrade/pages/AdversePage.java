@@ -19,10 +19,9 @@ public class AdversePage extends FunnelBasePage{
     }
 
     /* Click on "learn more" link */
-    public void adverseLearnMoreLink(){
+    public DocumentsPage clickAdverseLearnMoreLink(){
         click(adverseLink);
-        By by = By.cssSelector("[data-auto='layoutTitle']");
-        waitForElementToBeDisplayed(by, 10, 1);
+        return new DocumentsPage(driver);
     }
 
     /* Get the message for when loan was declined */

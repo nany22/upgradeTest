@@ -42,7 +42,6 @@ public class LoginApiTest extends AbstractTest {
                 .setRequestUrl(url + "v2/login")
                 .post(loginRequestPayload, 200)
                 .getResponse();
-        //Check if it is needed an assertions status 200  or it is enough??
 
         /*response1 json data(got from request) will be loaded and set in the pojo (UserResponse.class)*/
         UserResponse response1 = response.as(UserResponse.class);
@@ -75,7 +74,6 @@ public class LoginApiTest extends AbstractTest {
                 .setRequestUrl(url + "v2/login")
                 .post(loginRequestPayload2, 401)
                 .getResponse();
-        //Check if it is needed an assertions status 200  or it is enough??
     }
 
 }

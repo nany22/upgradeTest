@@ -52,12 +52,12 @@ public class LoanOffersUITest extends AbstractTest {
         String secondInterestRate = firstLogin.getLoanInterestRate();
         String secondAPR = firstLogin.getLoanAPR();
 
-        //Assertions between xpected and current result after re-ogin
-        Assert.assertEquals(secondAmount, firstAmount);
-        Assert.assertEquals(secondTerm, firstTerm);
-        Assert.assertEquals(secondMonthlyPayment, firstMonthlyPayment);
-        Assert.assertEquals(secondInterestRate, firstInterestRate);
-        Assert.assertEquals(secondAPR, firstAPR);
+        //Assertions between expected and current result after re-login
+        Assert.assertEquals(secondLogin.getLoanAmount(), firstAmount);
+        Assert.assertEquals(secondLogin.getLoanTerm(), firstTerm);
+        Assert.assertEquals(secondLogin.getMonthlyPayment(), firstMonthlyPayment);
+        Assert.assertEquals(secondLogin.getLoanInterestRate(), firstInterestRate);
+        Assert.assertEquals(secondLogin.getLoanAPR(), firstAPR);
 
         secondLogin.clickSignOut();
     }
@@ -84,13 +84,12 @@ public class LoanOffersUITest extends AbstractTest {
         Assert.assertTrue(declinedMessage.contains("We´re sorry, you were not approved."));
 
         //Validate current page includes integer as loanID (it is done using regex)
-        adversePage.adverseLearnMoreLink();
+        DocumentsPage documentsPage = adversePage.clickAdverseLearnMoreLink();
         String url = getDriver().getCurrentUrl();
         boolean isAMatch = url.matches(".*/portal/product/[0-9]+/documents");
         Assert.assertTrue(isAMatch, "url doesn't not match");
 
         //Validate specific PDF link exists
-        DocumentsPage documentsPage = new DocumentsPage(getDriver());
         boolean linkIsPresent = documentsPage.findLinkDocument("Adverse Action Notice.pdf");
         Assert.assertEquals(linkIsPresent, true);
     }
