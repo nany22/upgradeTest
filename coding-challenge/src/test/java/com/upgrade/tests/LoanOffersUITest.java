@@ -45,13 +45,6 @@ public class LoanOffersUITest extends AbstractTest {
                 .gotoSignInPage(url)
                 .signIn(borrower);
 
-        //save page values for second login in the `/signing page`
-        String secondAmount = secondLogin.getLoanAmount();
-        String secondTerm = firstLogin.getLoanTerm();
-        String secondMonthlyPayment = firstLogin.getMonthlyPayment();
-        String secondInterestRate = firstLogin.getLoanInterestRate();
-        String secondAPR = firstLogin.getLoanAPR();
-
         //Assertions between expected and current result after re-login
         Assert.assertEquals(secondLogin.getLoanAmount(), firstAmount);
         Assert.assertEquals(secondLogin.getLoanTerm(), firstTerm);
