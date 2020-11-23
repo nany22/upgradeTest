@@ -1,4 +1,5 @@
-:point_right: ## UpgradeTest:point_left:
+:point_right: ## UpgradeTest
+
 ### Overview
 This is challenge requested by Upgrade
 ### Installation
