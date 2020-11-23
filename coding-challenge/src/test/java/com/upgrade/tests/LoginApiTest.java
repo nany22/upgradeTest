@@ -1,5 +1,7 @@
 package com.upgrade.tests;
 
+import com.upgrade.pojos.LoanAccountResponse;
+import com.upgrade.pojos.LoanInReviewResponse;
 import com.upgrade.pojos.LoginRequest;
 import com.upgrade.pojos.UserResponse;
 import io.restassured.http.ContentType;
@@ -7,7 +9,6 @@ import io.restassured.response.Response;
 import lombok.extern.log4j.Log4j;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.UUID;
 
 
@@ -32,7 +33,7 @@ public class LoginApiTest extends AbstractTest {
                 .password(password)
                 .build();
 
-        /*Making request and getting the response given assigned to response object
+        /*Making request and assigning the response to a Response object
          * Validation of status 200 for valid user*/
         Response response = apiRequest()
                 .addHeader("x-cf-corr-id", UUID.randomUUID().toString())
@@ -41,26 +42,32 @@ public class LoginApiTest extends AbstractTest {
                 .setRequestUrl(url + "v2/login")
                 .post(loginRequestPayload, 200)
                 .getResponse();
-        //Check if it is needed or status code is already validated on post(). Assert.assertEquals(response.getStatusCode(),200);
+        //Check if it is needed an assertions status 200  or it is enough??
 
-        System.out.println(response.asString());
-        /*Response1 will load the json data(got from request) of response done above at json data(pojo UserResponse) of response1*/
+        /*response1 json data(got from request) will be loaded and set in the pojo (UserResponse.class)*/
         UserResponse response1 = response.as(UserResponse.class);
-        // Validate product type value
-        Assert.assertEquals(response1.loanInReviewGetter("productType"), "PERSONAL_LOAN");
+        // Validate some fields in addition to the one required (product type)
         Assert.assertEquals(response1.getFirstName(), "Ian");
+        for (LoanInReviewResponse loan: response1.getLoansInReview()){
+            Assert.assertEquals(loan.getProductType(),"PERSONAL_LOAN" );
+            Assert.assertEquals(loan.getId(),"9545966" );
+        }
+        for (LoanAccountResponse loan: response1.getLoanAccountSummaryAto()){
+            Assert.assertEquals(loan.getDaysPastDue(),0);
+        }
+
     }
 
     @Test
     public void invalidLoginToAccountTest() {
-        /*Building the login request with body (username(mail) and password)*/
+        /*Building the login request with invalid body (username(mail) and password)*/
         LoginRequest loginRequestPayload2 = LoginRequest.builder()
                 .username(email2)
                 .password(password2)
                 .build();
 
-        /*Making request and getting the response given assigned to response object
-         * Validation of status 200 for valid user*/
+
+        /* Validation of status 401 for invalid user */
         Response response2 = apiRequest()
                 .addHeader("x-cf-corr-id", UUID.randomUUID().toString())
                 .addHeader("x-cf-source-id", "coding-challenge")
@@ -68,8 +75,7 @@ public class LoginApiTest extends AbstractTest {
                 .setRequestUrl(url + "v2/login")
                 .post(loginRequestPayload2, 401)
                 .getResponse();
-        //Check if it is needed or status code is already validated on post(). Assert.assertEquals(response2.getStatusCode(),401);
-        System.out.println(response2.asString());
-
+        //Check if it is needed an assertions status 200  or it is enough??
     }
+
 }
