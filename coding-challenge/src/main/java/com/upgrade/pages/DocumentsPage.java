@@ -24,9 +24,10 @@ public class DocumentsPage extends BasePage {
         super(driver);
     }
 
-    /* Find document in the document page and check it contains a link
-    * @parameter docName is the document for searching */
+
     public boolean findLinkDocument(String docName){
+    /* Find document in the documents page and check it contains a link
+    * @parameter docName is the document for searching */
         boolean docExist = false;
         boolean linkExist = false;
         for (WebElement row: tableRows) {

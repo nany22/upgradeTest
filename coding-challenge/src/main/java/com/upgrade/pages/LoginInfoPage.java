@@ -52,7 +52,6 @@ public class LoginInfoPage extends BasePage {
         selectTermsOfUse();
         click(checkYourRateBtn);
         waitForPage();
-        //We need a logic (url or element) to use java generic and choose the right pageObject
         if (driver.getCurrentUrl().contains("offer-page")){
             log.info("User is redirected to OfferPage");
             return (T) new SelectOfferPage(driver);
