@@ -21,8 +21,6 @@ public class LoanOffersUITest extends AbstractTest {
         Borrower borrower = getTestBorrowerGoodCredit();
         LandingPage landingPage = new LandingPage(getDriver());
 
-        /* Assigning landingPage to a SelectOfferPage object to make it
-        easier to save values (taken of SelectOfferPage) after login */
         SelectOfferPage firstLogin = landingPage
                 .gotoLandingPage(url)
                 .enterLoanDetails(borrower)
@@ -38,8 +36,6 @@ public class LoanOffersUITest extends AbstractTest {
         String firstAPR = firstLogin.getLoanAPR();
         firstLogin.clickSignOut();
 
-        /* Assigning landingPage to a SignInPage object to make it
-        easier to save values (taken of SignInPage) after login */
         SignInPage signInPage = new SignInPage(getDriver());
         SelectOfferPage secondLogin = signInPage
                 .gotoSignInPage(url)

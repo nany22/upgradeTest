@@ -10,7 +10,6 @@ import org.testng.Assert;
 
 import java.util.Arrays;
 
-/*OfferPage extends of FunnelPage because OfferPage is inside of this last one*/
 @Log4j
 public class SelectOfferPage extends FunnelBasePage {
 

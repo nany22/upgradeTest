@@ -24,17 +24,13 @@ public class LoginApiTest extends AbstractTest {
         Please refer README.md for more details on APT Test
     */
 
-    /*LoginRequest.builder() is like a builder of everything inside Borrower pojo*/
     @Test
     public void loginToAccountTest() {
-        /*Building the login request with body (username(mail) and password)*/
         LoginRequest loginRequestPayload = LoginRequest.builder()
                 .username(email)
                 .password(password)
                 .build();
 
-        /*Making request and assigning the response to a Response object
-         * Validation of status 200 for valid user*/
         Response response = apiRequest()
                 .addHeader("x-cf-corr-id", UUID.randomUUID().toString())
                 .addHeader("x-cf-source-id", "coding-challenge")
@@ -43,7 +39,6 @@ public class LoginApiTest extends AbstractTest {
                 .post(loginRequestPayload, 200)
                 .getResponse();
 
-        /*response1 json data(got from request) will be loaded and set in the pojo (UserResponse.class)*/
         UserResponse response1 = response.as(UserResponse.class);
         // Validate some fields in addition to the one required (product type)
         Assert.assertEquals(response1.getFirstName(), "Ian");
