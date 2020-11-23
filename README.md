@@ -2,7 +2,7 @@
 ### Overview
 This is challenge requested by Upgrade
 ### Installation
-> https://github.com/nany22/upgradeTest.git
+> git clone https://github.com/nany22/upgradeTest.git
 ### Requirements requested
   - Maven 3.6.0+
   - JDK 11
@@ -34,8 +34,18 @@ This is challenge requested by Upgrade
         - From the `funnel/adverse-page`Click on "If you would like to learn more about why you were not approved, please click here".
         - Validate that current page is `/portal/product/<loanId>/documents`Validate that a link to "Adverse Action Notice.pdf" exists on the page.
   - Test Case 3: Login to account Test (API)
-    * > LoanApiTest.java
-    * Statement:
+    * > LoanApiTest.java, LoanAccountResponse.java, LoanInReviewResponse.java, LoanResponse.java
+    * Statement: Upgrade exposes a login API for registered borrowers, that should provide a 200 (OK) response if valid credentials are specified in the request. And a 401 response if the specified credentials are invalid. 
+The API endpoint is available at: https://credapi.credify.tech/api/brportorch/v2/login
+In your automated tests - validate atleast the following, and feel free to include any other validations that you deem necessary:
+1. Validate that for correct credentials provided in the payload above, the API response code is a 200 (OK)
+2. For the above use case, parse each json value in the response payload individually and then validate the productType attribute has value PERSONAL_LOAN
+3. Validate that in the initial POST request, if a different username is provided (that doesn't exist in our system) - the API response is a 401 (UnAuthorized)
     * What I did on my own: 
-    
-    Invalid Login to account Test (API)
+      - Adding new LoanResponse.java to load the json data got after request
+      - Adding LoanAccountResponse.java and LoanInReviewResponse.java for loading lists data from UserResponse
+      - For requested Validation:
+          - 1. was already done
+          - 2. Adding assert for product type data from LoanInReview list and other extra fields from LoanAccountResponse and firstname from UserResponse.
+          - 3. Writing a new test case 4: ** Invalid Logging to account test (API) ** for 401 cose status validation after request is sent.
+   
