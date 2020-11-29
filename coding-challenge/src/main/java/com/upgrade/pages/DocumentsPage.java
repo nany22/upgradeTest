@@ -17,9 +17,6 @@ public class DocumentsPage extends BasePage {
     } )
     private List<WebElement> tableRows;
 
-    @FindBy(css = "a[data-auto='downloadDocument']")
-    private WebElement downloadDocument;
-
     public DocumentsPage(WebDriver driver){
         super(driver);
     }
