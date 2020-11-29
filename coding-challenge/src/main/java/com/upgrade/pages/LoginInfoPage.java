@@ -2,16 +2,10 @@ package com.upgrade.pages;
 
 import com.upgrade.pojos.Borrower;
 import lombok.extern.log4j.Log4j;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import java.math.BigDecimal;
 import java.util.Arrays;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 @Log4j
 public class LoginInfoPage extends BasePage {

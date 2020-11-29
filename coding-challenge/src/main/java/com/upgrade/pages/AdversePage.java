@@ -21,11 +21,13 @@ public class AdversePage extends FunnelBasePage{
     /* Click on "learn more" link */
     public DocumentsPage clickAdverseLearnMoreLink(){
         click(adverseLink);
+        waitForPage();
         return new DocumentsPage(driver);
     }
 
     /* Get the message for when loan was declined */
     public String getDeclinedMessage() {
+        waitForPage();
         return declinedMessage.getText();
     }
 
