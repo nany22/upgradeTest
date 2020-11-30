@@ -17,7 +17,8 @@ public class UserResponse {
     private String userUuid;
     private String authenticationLevel;
     private String actorId;
-    private List loanApplications;
+    //Structure is unknown so it is a list of object
+    private List<Object> loanApplications;
     private List<LoanInReviewResponse> loansInReview;
     private List<LoanAccountResponse> loanAccountSummaryAto;
 

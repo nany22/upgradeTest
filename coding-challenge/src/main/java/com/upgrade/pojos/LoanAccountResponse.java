@@ -11,10 +11,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class LoanAccountResponse {
-
-    private List loanAccountNumber;
-    private List postIssuanceLoanStatus;
+    //Structure is unknown so it is a list of object
+    private List<Object> loanAccountNumber;
+    private List<Object> postIssuanceLoanStatus;
     private int daysPastDue;
-    private List loanProductType;
+    private List<Object> loanProductType;
 
 }
